@@ -1,0 +1,20 @@
+from alpha_vantage.timeseries import TimeSeries
+import json
+import csv
+
+key = '0N5JVZ3UXYOY0FLJ'
+ts = TimeSeries(key)
+company = 'GOOGL'
+data, meta = ts.get_intraday(company)
+
+test_csv = open('temp_csv', 'w')
+
+csvw = csv.writer(test_csv)
+csvw.writerow(data.keys())
+
+#print json.dumps(data, indent=4, separators=(",", ": "))
+#print data['2017-12-15 16:00:00']['5. volume']
+for day in data:
+    csvw.writerow(data.values())
+
+test_csv.close()
